@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.ldap.core.LdapTemplate;
 
 import com.mydomain.ldap.entity.Person;
+import com.mydomain.ldap.repository.BounceRepo;
 import com.mydomain.ldap.repository.PersonRepo;
 
 @SpringBootApplication
@@ -17,6 +18,9 @@ public class LdapSampleApplication implements CommandLineRunner {
 
 	@Autowired
 	private PersonRepo personRepo;
+	
+	@Autowired
+	private BounceRepo bounceRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(LdapSampleApplication.class, args);
@@ -24,19 +28,26 @@ public class LdapSampleApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
-		personRepo.setLdapTemplate(ldapTemplate);
-		println(personRepo.getAllPersonNames());
-
-		// Base DN から追加された部分の属性のみの指定で良い
-		println(personRepo.findPerson("cn=Taro"));
-
-		personRepo.create(createPerson("Shiro", "Shiro", "shiro".getBytes()));
-
-		println(personRepo.getAllPersons());
+		//runPerson();
+		
+		bounceRepo.setLdapTemplate(ldapTemplate);
+		println(bounceRepo.findByDn("email=test01@my-domain.com"));
+		
+		for(int i=1; i<=10; i++) {
+			bounceRepo.create(String.format("test%05d@my-domain.com", i));
+		}
 	}
 
-	public Person createPerson(String name, String fullname, byte[] userPassword) {
+	private void runPerson() {
+		personRepo.setLdapTemplate(ldapTemplate);
+		println(personRepo.getAllPersonNames());
+		// Base DN から追加された部分の属性のみの指定で良い
+		println(personRepo.findPerson("cn=Taro"));
+		personRepo.create(createPerson("Shiro", "Shiro", "shiro".getBytes()));
+		println(personRepo.getAllPersons());
+	}
+	
+	private Person createPerson(String name, String fullname, byte[] userPassword) {
 		Person p = new Person();
 		p.setName(name);
 		p.setFullname(fullname);

@@ -12,18 +12,15 @@ import javax.naming.directory.BasicAttribute;
 import javax.naming.directory.BasicAttributes;
 
 import org.springframework.ldap.core.AttributesMapper;
-import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.support.LdapNameBuilder;
 import org.springframework.stereotype.Component;
 
 import com.mydomain.ldap.entity.Person;
 
 @Component
-public class PersonRepoImpl implements PersonRepo {
+public class PersonRepoImpl extends RepoBase implements PersonRepo {
 
 	public static final String BASE_DN = "dc=my-domain,dc=com";
-
-	private LdapTemplate ldapTemplate;
 
 	protected Name buildDn(Person p) {
 		//@formatter:off
@@ -62,10 +59,6 @@ public class PersonRepoImpl implements PersonRepo {
 		attrs.put("sn", p.getFullname());
 		attrs.put("userPassword", p.getUserPassword());
 		return attrs;
-	}
-
-	public void setLdapTemplate(LdapTemplate ldapTemplate) {
-		this.ldapTemplate = ldapTemplate;
 	}
 
 	// 1つの属性を取得
