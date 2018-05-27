@@ -1,0 +1,5 @@
+dn: email=test01@my-domain.com,dc=my-domain,dc=com
+objectClass: top
+objectClass: bounce
+email: test01@my-domain.com
+

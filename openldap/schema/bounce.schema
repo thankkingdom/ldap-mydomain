@@ -1,0 +1,11 @@
+#attributeTypes: ( 1.1.20180527.1
+#	NAME 'email'
+#	DESC 'email'
+#	EQUALITY caseIgnoreMatch
+#	SUBSTR caseIgnoreSubstringsMatch
+#	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 )
+objectclass ( 1.1.20180527.2
+	NAME 'bounce'
+	DESC 'Bounce'
+	SUP top STRUCTURAL 
+	MUST email )
