@@ -1,0 +1,13 @@
+OpenLDAP
+
+# デーモン起動
+sudo /usr/libexec/slapd -d 255
+
+$ sudo netstat -an | grep 389
+Password:
+tcp4       0      0  *.389                  *.*                    LISTEN     
+tcp6       0      0  *.389                  *.*                    LISTEN
+
+
+cat /private/var/db/openldap/run/slapd.pid
+kill -TERM ?
