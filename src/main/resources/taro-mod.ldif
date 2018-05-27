@@ -1,0 +1,4 @@
+dn: cn=Taro,dc=my-domain,dc=com
+changetype: modify
+add: objectClass
+objectClass: top

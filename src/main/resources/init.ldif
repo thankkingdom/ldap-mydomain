@@ -1,0 +1,8 @@
+dn: dc=my-domain,dc=com
+objectClass: organization
+objectClass: dcObject
+o: DesigNET, INC.
+
+dn: cn=Manager,dc=my-domain,dc=com
+objectClass: organizationalRole
+cn: Manager

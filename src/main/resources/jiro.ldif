@@ -1,0 +1,7 @@
+dn: cn=Jiro,dc=my-domain,dc=com
+objectClass: top
+objectClass: Person
+cn: Jiro
+sn: Jiro Nakata
+UserPassword: {SSHA}6u9/6N9TJ3eqELlXLWi1Nezslxrdvt3F
+

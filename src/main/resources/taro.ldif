@@ -1,0 +1,7 @@
+dn: cn=Taro,dc=my-domain,dc=com
+objectClass: top
+objectClass: Person
+cn: Taro
+sn: Degi Taro
+userPassword: {SSHA}E8DYHTVJVt7yWa/GoDPmyj6F0I1Mp4HO
+
