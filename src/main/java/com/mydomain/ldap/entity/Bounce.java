@@ -10,7 +10,7 @@ import org.springframework.ldap.odm.annotations.Id;
 import lombok.Data;
 
 @Data
-@Entry(objectClasses = { "top" })
+@Entry(objectClasses = { "top" }, base = "cn=bounce")
 public class Bounce {
 
 	@Id

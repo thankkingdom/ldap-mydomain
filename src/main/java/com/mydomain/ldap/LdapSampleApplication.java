@@ -1,11 +1,14 @@
 package com.mydomain.ldap;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.ldap.core.LdapTemplate;
 
+import com.mydomain.ldap.entity.Bounce;
 import com.mydomain.ldap.entity.Person;
 import com.mydomain.ldap.repository.BounceRepo;
 import com.mydomain.ldap.repository.PersonRepo;
@@ -30,12 +33,17 @@ public class LdapSampleApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		//runPerson();
 		
-		bounceRepo.setLdapTemplate(ldapTemplate);
-		println(bounceRepo.findByDn("email=test01@my-domain.com"));
+		//println(bounceRepo.findByDn("email=test01@my-domain.com"));
 		
 		for(int i=1; i<=10; i++) {
-			bounceRepo.create(String.format("test%05d@my-domain.com", i));
+			String email = String.format("test%05d@my-domain.com", i);
+			if (!bounceRepo.findByDn("dn:" + email + ",cn:bounce").isPresent()) {
+				bounceRepo.create(email);
+			}
 		}
+		
+		List<Bounce> list = bounceRepo.findAll();
+		list.forEach(action -> println(action.getDn()));
 	}
 
 	private void runPerson() {
